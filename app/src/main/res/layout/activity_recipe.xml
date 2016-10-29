@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_recipe"
     android:layout_width="match_parent"
@@ -9,5 +10,74 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.tec.chefapp.RecipeActivity">
+
+    <TextView
+        android:text="Nombre de la receta:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nombre_receta_textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Pasos:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/informacion_nutricional_editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/pasos_textView" />
+
+    <TextView
+        android:text="Información nutricional:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/informacion_nutricional_textView"
+        android:layout_below="@+id/nombre_receta_editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nombre_receta_editText"
+        android:layout_below="@+id/nombre_receta_textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/informacion_nutricional_editText"
+        android:layout_alignEnd="@+id/informacion_nutricional_editText" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_plus"
+        android:id="@+id/addStep"
+        android:layout_below="@+id/pasos_textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="android.support.v7.widget.LinearLayoutCompat"
+        android:layout_below="@+id/pasos_textView"
+        android:id="@+id/steps_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/informacion_nutricional_editText"
+        android:layout_below="@+id/informacion_nutricional_textView"
+        android:layout_toRightOf="@+id/steps_view"
+        android:layout_toEndOf="@+id/steps_view" />
 
 </RelativeLayout>

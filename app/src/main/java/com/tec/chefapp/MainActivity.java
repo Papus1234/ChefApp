@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         user_email = (TextView) header.findViewById(R.id.email);
         profile_pic = (ImageView) header.findViewById(R.id.profile_pic);
     }
-    //Asigna los datos a mostrar, oteniendolos de las respuestas del servidor de LinkedIn, mediante un JSON
+    //Asigna los datos a mostrar, oteniéndolos de las respuestas del servidor de LinkedIn, mediante un JSON
     public void setUserProfile(JSONObject response){
         try{
             user_email.setText(response.get("emailAddress").toString());
