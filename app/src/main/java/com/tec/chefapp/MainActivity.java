@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             user_name.setText(response.get("formattedName").toString());
             Picasso.with(this).load(response.getString("pictureUrl")).into(profile_pic);
         } catch (Exception e){
+
             e.printStackTrace();
         }
     }
