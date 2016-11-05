@@ -34,4 +34,44 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:text="Puerto:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/puerto_textView"
+        android:textColor="@android:color/background_dark"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/ip_editText"
+        android:layout_above="@+id/puerto_textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:text="Dirección IP:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ip_textView"
+        android:textColor="@android:color/background_dark"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/puerto_editText"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/puerto_textView"
+        android:layout_alignLeft="@+id/ip_editText"
+        android:layout_alignStart="@+id/ip_editText" />
+
 </RelativeLayout>

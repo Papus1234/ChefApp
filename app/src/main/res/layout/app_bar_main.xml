@@ -26,9 +26,15 @@
             android:layout_gravity="top|right"
             android:layout_weight="1" />
 
-    </android.support.design.widget.AppBarLayout>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="460dp"
+            android:name="com.tec.chefapp.RecipeView"
+            android:id="@+id/view_fragment"
+            tools:layout="@layout/recipe_view"
+            android:layout_weight="1" />
 
-    <include layout="@layout/content_main" />
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -22,18 +23,27 @@ import com.linkedin.platform.errors.LIAuthError;
 import com.linkedin.platform.listeners.AuthListener;
 import com.linkedin.platform.utils.Scope;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
+import Conexion.Comunication;
+
 public class JoinActivity extends AppCompatActivity {
 
     ImageButton join;
+    EditText ip,puerto;
+    static String ip_number,puerto_number;
+    //172.26.108.4
     //Esto es un método que me permite pasar a la siguiente activity si ingreso con mi cuenta de LinkedIn
     public void nextActivity(ImageButton button, final Activity previous, final Class next)
     {
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                login_linkedin();
-            }
-        });
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login_linkedin();
+                }
+            });
     }
     //Método principal de la actividad, aquí se carga todo
     @Override
@@ -43,6 +53,8 @@ public class JoinActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_join);
         join= (ImageButton) findViewById(R.id.linkedin_button);
+        ip= (EditText) findViewById(R.id.ip_editText);
+        puerto= (EditText) findViewById(R.id.puerto_editText);
         nextActivity(join,this,MainActivity.class);
     }
     // Método que me permite validar si la autentificación de la cuenta de LinkedIn fue exitosa, de lo contrario muestra el código del error
@@ -62,6 +74,10 @@ public class JoinActivity extends AppCompatActivity {
     //Este método me permite transferir los datos obtenidos de LinkedIn para ser usados en otra actividad, cuando nota la acción del método login_linkedin, ella cambia la actividad actual por la que se estipuló
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
+        ip_number= ip.getText().toString();
+        puerto_number= puerto.getText().toString();
+        Toast toast = Toast.makeText(getApplicationContext(),"Ip: "+ip_number+"\nPuerto: "+puerto_number, Toast.LENGTH_LONG);
+        toast.show();
         LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
         Intent intent=new Intent(this,MainActivity.class);
         startActivity(intent);

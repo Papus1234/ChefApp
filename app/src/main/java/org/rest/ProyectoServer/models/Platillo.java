@@ -2,13 +2,14 @@ package org.rest.ProyectoServer.models;
 
 public class Platillo {
 	String nombre;
-	Ingredientes ingredientes= new Ingredientes();
+	Ingredientes ingredientes;
 	String informacion_nutricional;
 	int precio;
 	int tiempo_de_preparacion;
 	Receta receta =new Receta();
 
 	public Platillo() {
+		ingredientes=new Ingredientes();
 		this.informacion_nutricional = "";
 		this.nombre = "";
 		this.precio = 0;

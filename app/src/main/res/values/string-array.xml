@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorias">
+        <item>Fruta</item>
+        <item>Vegetal</item>
+        <item>Carne</item>
+        <item>Lacteo</item>
+        <item>Grano</item>
+    </string-array>
+</resources>

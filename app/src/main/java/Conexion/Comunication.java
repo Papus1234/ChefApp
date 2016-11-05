@@ -11,6 +11,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -27,10 +28,23 @@ public class Comunication
     public Context context;
     String URL;
     public HttpClient httpclient = new DefaultHttpClient();
+    public  String ip, port, path;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+        URL = "http://"+ip+":"+port+"/ProyectoServer/webapi/Cheff/"+path;
+    }
 
     public Comunication(){
     }
     public void conect(String ip, String port,String path) {
+        this.ip=ip;
+        this.port=port;
+        this.path=path;
         URL = "http://"+ip+":"+port+"/ProyectoServer/webapi/Cheff/"+path;
         StrictMode.ThreadPolicy p = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(p);
@@ -48,8 +62,8 @@ public class Comunication
         JSONObject JO = new JSONObject();
         JO.put("nombre",platillo.getNombre());
         JO.put("informacion_nutricional",platillo.getInformacion_nutricional());
-//      JO.put("receta",platillo.getReceta().getPasos());
-//      JO.put("ingredientes",platillo.getIngredientes());
+        JO.put("receta",platillo.getReceta().getPasos());
+        JO.put("ingredientes",platillo.getIngredientes());
         post(JO);
     }
     public void post(JSONObject JSONobject) throws JSONException, IOException
@@ -70,7 +84,19 @@ public class Comunication
         Toast toast = Toast.makeText(context, text1, Toast.LENGTH_LONG);
         toast.show();
     }
-    public void get(){
 
+    public void get(String path)throws JSONException, IOException
+    {
+        setPath(path);
+        HttpGet request=new HttpGet(URL);
+        httpclient.execute(request);
+
+        HttpResponse response = httpclient.execute(request);
+        HttpEntity entity = response.getEntity();
+
+        String responseText = EntityUtils.toString(entity);
+        CharSequence text1 = responseText;
+        Toast toast = Toast.makeText(context, text1, Toast.LENGTH_LONG);
+        toast.show();
     }
 }
