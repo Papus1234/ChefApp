@@ -4,9 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISessionManager;
@@ -30,9 +30,15 @@ import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.rest.ProyectoServer.models.Platillo;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import Conexion.Comunication;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView user_name, user_email;
     NavigationView navigation_view;
     Button logout;
-
+    static String email="";
+    public ArrayList<String> Options=new ArrayList<String>();
     //Método principal en donde se define todo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +64,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progress.setCanceledOnTouchOutside(false);
         progress.show();
         getUserData(); //Método definido por mi
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
-                startActivity(intent);
-            }
-        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         setNavigationHeader(); //Método definido por mi
         navigation_view.setNavigationItemSelectedListener(this);
+
         //maneja la acción del botón logout
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +82,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-
+        populateList();
+        ClickCallback();
+    }
+    public void populateList(){
+        Options.add("1");
+        Options.add("2");
+        Options.add("3");
+        Options.add("4");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.order_template, Options);
+        //configurar el ListView para utilizar los items creados con el contructor
+        ListView list = (ListView) findViewById(R.id.ordenes_view);
+        list.setAdapter(adapter);
+    }
+    public void ClickCallback(){
+        ListView list = (ListView) findViewById(R.id.ordenes_view);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this,"Item "+position+" selected", Toast.LENGTH_LONG).show();
+            }
+        });
     }
     //La información del ususario es obtenida mediante paquetes JSON enviados por el servidor de LinkedIn
     public void getUserData()
@@ -119,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setUserProfile(JSONObject response){
         try{
             user_email.setText(response.get("emailAddress").toString());
+            email=response.get("emailAddress").toString();
             user_name.setText(response.get("formattedName").toString());
             Picasso.with(this).load(response.getString("pictureUrl")).into(profile_pic);
         } catch (Exception e){
@@ -155,9 +177,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_chat){
-
+            Intent intent = new Intent(MainActivity.this, Chat.class);
+            startActivity(intent);
         }else if (id == R.id.nav_recipe){
-
+            Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_inventory) {
+            Intent intent = new Intent(MainActivity.this, InventoryActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -169,4 +196,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

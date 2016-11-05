@@ -2,14 +2,10 @@ package Conexion;
 
 import android.content.Context;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
-import com.tec.chefapp.RecipeActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -21,14 +17,13 @@ import org.json.JSONObject;
 import org.rest.ProyectoServer.models.Platillo;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public class Comunication
 {
     public Context context;
     String URL;
     public HttpClient httpclient = new DefaultHttpClient();
-    public  String ip, port, path;
+    public  String ip, port, path, module;
 
     public String getPath() {
         return path;
@@ -37,6 +32,10 @@ public class Comunication
     public void setPath(String path) {
         this.path = path;
         URL = "http://"+ip+":"+port+"/ProyectoServer/webapi/Cheff/"+path;
+    }
+    public void setModule(String module) {
+        this.module = module;
+        URL = "http://"+ip+":"+port+"/ProyectoServer/webapi/"+module+"/"+path;
     }
 
     public Comunication(){
@@ -85,7 +84,7 @@ public class Comunication
         toast.show();
     }
 
-    public void get(String path)throws JSONException, IOException
+    public String get(String path)throws JSONException, IOException
     {
         setPath(path);
         HttpGet request=new HttpGet(URL);
@@ -98,5 +97,22 @@ public class Comunication
         CharSequence text1 = responseText;
         Toast toast = Toast.makeText(context, text1, Toast.LENGTH_LONG);
         toast.show();
+        return text1.toString();
+    }
+    public String get(String path,String module)throws JSONException, IOException
+    {
+        setPath(path);
+        setModule(module);
+        HttpGet request=new HttpGet(URL);
+        httpclient.execute(request);
+
+        HttpResponse response = httpclient.execute(request);
+        HttpEntity entity = response.getEntity();
+
+        String responseText = EntityUtils.toString(entity);
+        CharSequence text1 = responseText;
+        Toast toast = Toast.makeText(context, text1, Toast.LENGTH_LONG);
+        toast.show();
+        return text1.toString();
     }
 }

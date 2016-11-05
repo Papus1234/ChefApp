@@ -22,9 +22,12 @@
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".RecipeActivity"
+            android:name=".RegisterRecipeActivity"
             android:label="RecipeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".RecipesActivity" />
+        <activity android:name=".Chat" />
+        <activity android:name=".InventoryActivity"></activity>
     </application>
 
 </manifest>

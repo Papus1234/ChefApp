@@ -1,46 +1,28 @@
 package com.tec.chefapp;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.linkedin.platform.LISessionManager;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.rest.ProyectoServer.models.Platillo;
 
 import java.io.IOException;
 
 import Conexion.Comunication;
 
-public class RecipeActivity extends AppCompatActivity{
+public class RegisterRecipeActivity extends AppCompatActivity{
 
     public Platillo platillo = new Platillo();
     EditText editText, editText1;
@@ -108,7 +90,7 @@ public class RecipeActivity extends AppCompatActivity{
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(RecipeActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterRecipeActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

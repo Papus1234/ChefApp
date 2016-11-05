@@ -10,7 +10,11 @@ public class Ingrediente {
 		cantidad=1;
 		nombre=n;
 	}
-	
+
+	public Ingrediente() {
+
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
