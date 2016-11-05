@@ -8,6 +8,11 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:id="@+id/ordenes_view"
+        android:layout_height="wrap_content" />
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
@@ -23,10 +28,5 @@
         app:menu="@menu/activity_main_drawer" >
 
     </android.support.design.widget.NavigationView>
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:id="@+id/ordenes_view"
-        android:layout_height="wrap_content" />
 
 </android.support.v4.widget.DrawerLayout>

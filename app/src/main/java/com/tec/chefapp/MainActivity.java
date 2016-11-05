@@ -30,8 +30,10 @@ import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.rest.ProyectoServer.models.Ingrediente;
 import org.rest.ProyectoServer.models.Platillo;
 
 import java.io.IOException;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigation_view;
     Button logout;
     static String email="";
-    public ArrayList<String> Options=new ArrayList<String>();
+    public ArrayList<String> Ordenes=new ArrayList<String>();
     //Método principal en donde se define todo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,27 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(MainActivity.this, JoinActivity.class);
                 finish();
                 startActivity(intent);
-            }
-        });
-        populateList();
-        ClickCallback();
-    }
-    public void populateList(){
-        Options.add("1");
-        Options.add("2");
-        Options.add("3");
-        Options.add("4");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.order_template, Options);
-        //configurar el ListView para utilizar los items creados con el contructor
-        ListView list = (ListView) findViewById(R.id.ordenes_view);
-        list.setAdapter(adapter);
-    }
-    public void ClickCallback(){
-        ListView list = (ListView) findViewById(R.id.ordenes_view);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,"Item "+position+" selected", Toast.LENGTH_LONG).show();
             }
         });
     }
